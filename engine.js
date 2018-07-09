@@ -116,8 +116,12 @@ module.exports = function (options) {
         };
 
         // parentheses are only needed when a scope is present
-        var scope = answers.scope.trim();
-        scope = scope ? '(' + answers.scope.trim() + ')' : '';
+        var scope = answers.scope;
+        if (Array.isArray(scope)) {
+          scope = scope.join(', ');
+        }
+        scope = scope.trim();
+        scope = scope ? '(' + scope + ')' : '';
 
         // Hard limit this line
         var head = (answers.type + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
