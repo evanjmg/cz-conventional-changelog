@@ -93,6 +93,11 @@ module.exports = function (options) {
           }
         }, {
           type: 'confirm',
+          name: 'needDeployment',
+          message: 'Does this commit needs to be deployed?',
+          default: true
+        }, {
+          type: 'confirm',
           name: 'isIssueAffected',
           message: 'Does this change affect any open issues?',
           default: false
@@ -123,8 +128,11 @@ module.exports = function (options) {
         scope = scope.trim();
         scope = scope ? '(' + scope + ')' : '';
 
+        // add [skip-ci] in commit message to trip deployment pipeline when necessary
+        var skipDeploymentMsg = answers.needDeployment ? '' : '[skip-ci] ';
+
         // Hard limit this line
-        var head = (answers.type + scope + ': ' + answers.subject.trim()).slice(0, maxLineWidth);
+        var head = (answers.type + scope + ': ' + skipDeploymentMsg + answers.subject.trim()).slice(0, maxLineWidth);
 
         // Wrap these lines at 100 characters
         var body = wrap(answers.body, wrapOptions);
