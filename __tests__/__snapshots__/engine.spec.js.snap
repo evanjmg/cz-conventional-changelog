@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Engine should add [skip-ci] to commit message head if user said yes to skip deployment 1`] = `
+"chore(buildspec): [skip-ci] This is a test message
+
+
+
+fix #Issue01"
+`;
+
+exports[`Engine should not add [skip-ci] to commit message head if user said no (default) to skip deployment 1`] = `
+"chore(buildspec): This is a test message
+
+
+
+fix #Issue01"
+`;
