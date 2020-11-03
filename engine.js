@@ -88,6 +88,10 @@ module.exports = function(options) {
     // By default, we'll de-indent your commit
     // template and will keep empty lines.
     prompter: function(cz, commit) {
+      cz.registerPrompt(
+        'autocomplete',
+        require('inquirer-autocomplete-prompt')
+      );
       // Let's ask some questions of the user
       // so that we can populate our commit
       // template.
@@ -97,10 +101,10 @@ module.exports = function(options) {
       // collection library if you prefer.
       cz.prompt([
         {
-          type: 'list',
+          type: 'autocomplete',
           name: 'type',
           message: "Select the type of change that you're committing:",
-          choices: choices,
+          source: choices,
           default: options.defaultType
         },
         scopePrompt,
