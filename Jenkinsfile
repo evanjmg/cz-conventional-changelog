@@ -57,7 +57,7 @@ pipeline {
           if(env.BRANCH_NAME == 'master') {
             nodejs(nodeJSInstallationName: nodeJsName) {
               configFileProvider([ configFile(fileId: 'jenkins-nexus-internal-npm', variable: 'NPM_CREDS') ]) {
-                sh 'npm run semantic-release'
+                sh 'npm run publish'
               }
             }
           }
